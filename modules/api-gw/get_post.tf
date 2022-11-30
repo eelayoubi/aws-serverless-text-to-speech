@@ -34,10 +34,10 @@ resource "aws_api_gateway_integration" "rest_api_get_method_integration" {
   passthrough_behavior    = "WHEN_NO_TEMPLATES"
   request_templates = {
     "application/json" = <<EOF
-{
-  "postId": "$input.params('postId')"
-}
-EOF
+    {
+      "postId": "$input.params('postId')"
+    }
+    EOF
   }
   depends_on = [aws_api_gateway_method_response.rest_api_get_method_response_200, aws_api_gateway_method_response.rest_api_get_method_response_400]
 }
@@ -63,11 +63,11 @@ resource "aws_api_gateway_integration_response" "rest_api_get_integration_respon
   selection_pattern = ".*\"Error\".*"
   response_templates = {
     "application/json" = <<EOF
-{
-    "errorMessage":" $input.path('$.errorMessage')",
-    "statusCode": 401
-}
-EOF
+    {
+        "errorMessage":" $input.path('$.errorMessage')",
+        "statusCode": 401
+    }
+    EOF
   }
 }
 

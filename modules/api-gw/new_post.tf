@@ -53,11 +53,11 @@ resource "aws_api_gateway_integration_response" "rest_api_new_post_integration_r
   selection_pattern = ".*\"Error\".*"
   response_templates = {
     "application/json" = <<EOF
-{
-    "errorMessage":" $input.path('$.errorMessage')",
-    "statusCode": 401
-}
-EOF
+    {
+        "errorMessage":" $input.path('$.errorMessage')",
+        "statusCode": 401
+    }
+    EOF
   }
 }
 
