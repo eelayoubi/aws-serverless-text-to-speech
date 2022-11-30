@@ -14,7 +14,7 @@ resource "aws_lambda_function" "function" {
   runtime          = "nodejs16.x"
   handler          = var.lambda_handler
   filename         = local.filepath
-  source_code_hash = data.archive_file.lambda_archive.output_md5
+  source_code_hash = filebase64sha256(local.filepath)
   role             = aws_iam_role.lambda_function_role.arn
   timeout          = 10
   dynamic "environment" {
@@ -23,6 +23,8 @@ resource "aws_lambda_function" "function" {
       variables = var.environment_variables
     }
   }
+
+  depends_on = [data.archive_file.lambda_archive]
 }
 
 resource "aws_cloudwatch_log_group" "aggregator" {
