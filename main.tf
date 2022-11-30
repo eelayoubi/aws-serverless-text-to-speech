@@ -42,3 +42,21 @@ module "convert_post_to_audio_lambda" {
     "BUCKET_NAME" = "${aws_s3_bucket.audio_posts.id}"
   }
 }
+
+module "api_gateway" {
+  source                 = "./modules/api-gw"
+  api_gateway_region     = var.region
+  rest_api_name          = "posts"
+  api_gateway_account_id = data.aws_caller_identity.current.account_id
+
+  get_post_lambda_function_name = module.get_post_lambda.function_name
+  get_post_lambda_function_arn  = module.get_post_lambda.function_invoke_arn
+
+  new_post_lambda_function_name = module.new_post_lambda.function_name
+  new_post_lambda_function_arn  = module.new_post_lambda.function_invoke_arn
+
+  depends_on = [
+    module.get_post_lambda,
+    module.new_post_lambda
+  ]
+}

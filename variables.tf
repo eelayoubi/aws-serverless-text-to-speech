@@ -1,3 +1,9 @@
+variable "region" {
+  type        = string
+  default     = "us-east-1"
+  description = "The AWS region to use"
+}
+
 variable "posts_ddb_name" {
   type    = string
   default = "posts"
