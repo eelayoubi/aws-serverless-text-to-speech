@@ -1,11 +1,12 @@
 resource "random_string" "s3_bucket_suffix" {
   length  = 7
   special = false
-  upper = false
+  upper   = false
 }
 
 resource "aws_s3_bucket" "audio_posts" {
-  bucket = "audio-posts-${random_string.s3_bucket_suffix.result}"
+  bucket        = "audio-posts-${random_string.s3_bucket_suffix.result}"
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_acl" "audio_posts_bucket_acl" {
