@@ -77,7 +77,7 @@ function splitTextToChunkRequests(items) {
         let textChunk;
         let end = textToSplit.indexOf(".", 2500);
         if (end == -1) {
-            end = textToSplit.indexOf(".", 2500);
+            end = textToSplit.indexOf(" ", 2500);
         }
         textChunk = textToSplit.substring(0, end + 1);
         textToSplit = textToSplit.substring(end + 1);
